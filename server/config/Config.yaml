@@ -1,0 +1,30 @@
+# default run mode
+RUN_MODE: 'dev'
+# default db host
+DB_HOST: '127.0.0.1'
+# db driver (support mysql、oracle)
+DB_DRIVER: 'oracle' 
+# default db port
+DB_PORT: '55931'
+# default db name
+DB_NAME: 'zhuiyi'
+# default db name
+DB_USER: 'root'
+# default db name
+DB_PASSWD: 'zhuiyi123'
+# db log
+DB_LOGMODE: 'Info'
+# debug mode
+DEBUG_MODE: true
+# Log Level
+LOG_LEVEL: 'debug'
+# HTTP Req Timeout
+TIME_DURATION: 10
+# page size
+PAGE_SIZE: 20
+# server port
+SERVER_PORT: '8080'
+# gRPC port
+GRPC_PORT: '22530'
+
+
