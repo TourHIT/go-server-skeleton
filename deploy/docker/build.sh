@@ -23,7 +23,7 @@ function build() {
 	version=$1
 	repoUser=$2
 	repoHost=$3
-	docker build -t $repoHost/$repoUser/gin-server-skeleton:$version -f docker/Dockerfile  --no-cache ./
+	docker build -t $repoHost/$repoUser/gin-server-skeleton:$version -f deploy/docker/Dockerfile  --no-cache ./
 }
 
 # prune image
@@ -39,8 +39,6 @@ function push() {
 	docker push $repoHost/$repoUser/gin-server-skeleton:$version
 }
 
-
-
 #main 
 function main() {
 	build $1 $2 $3
@@ -51,4 +49,4 @@ function main() {
 # run main
 main $appVersion $repoUser $repoHost
 
-export TICKET_VERSION=$appVersion
+export SERVER_VERSION=$appVersion

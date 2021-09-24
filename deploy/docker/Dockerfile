@@ -8,9 +8,9 @@ WORKDIR /opt/app/
 COPY server/config/Config.yaml /opt/app/config/Config.yaml
 COPY server/web /opt/app/web/
 
-RUN apt-get install git && \
-	git clone https://github.com/codeandcode0x/go-server-skeleton.git && \
-	cd gin-server-skeleton/ && \
+RUN apt-get install git -y && \
+	git clone https://e.coding.net/ethansmart/workandwork/go-server-skeleton.git && \
+	cd go-server-skeleton/ && \
     CGO_ENABLED=0 GOOS=linux go build -o /opt/app/server main.go
 
 
