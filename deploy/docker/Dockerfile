@@ -10,7 +10,7 @@ COPY server/web /opt/app/web/
 
 RUN apt-get install git -y && \
 	git clone https://e.coding.net/ethansmart/workandwork/go-server-skeleton.git && \
-	cd go-server-skeleton/ && \
+	cd go-server-skeleton/server && \
     CGO_ENABLED=0 GOOS=linux go build -o /opt/app/server main.go
 
 
