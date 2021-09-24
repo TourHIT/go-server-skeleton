@@ -99,6 +99,7 @@ func DBInit() {
 
 	//select db driver
 	switch dbDriver {
+	// 支持 mysql
 	case "mysql":
 		//get conn
 		//check db
@@ -110,14 +111,12 @@ func DBInit() {
 		Conn, err = gorm.Open(mysql.Open(dsn+"/"+dbName+"?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{
 			Logger: DBLogger,
 		})
-
+	// 支持 oracle
 	case "oracle":
 		log.Println("oracle")
-		Conn, err = gorm.Open(oracle.Open("system/oracle@127.0.0.1:62869/XE"), &gorm.Config{
+		Conn, err = gorm.Open(oracle.Open("system/oracle@127.0.0.1:56668/XE"), &gorm.Config{
 			Logger: DBLogger,
-			//SkipDefaultTransaction: true,
 		})
-
 	}
 
 	//connect err

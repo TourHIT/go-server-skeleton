@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  # app backend
+  app:
+    depends_on:
+      - mariadb
+    image: ${REPO_HOST}/roandocker/gin-server-skeleton:${IMAGE_TAG}
+    command: /bin/sh -c "./app"
+    ports:
+      - 8080:8080
+    environment:
+      DB_HOST: mariadb
+      DB_PORT: "3306"
+      DB_USER: root
+      DB_PASSWD: ${DB_PASSWD}
+      DB_DATABASE: gin_scaffold
+      DB_LOGMODE: "true"
+    deploy:
+      replicas: ${POD_REPLICAS}
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 300M
+        reservations:
+          cpus: '0.25'
+          memory: 150M
+    # healthcheck:
+    #   test: ["CMD-SHELL", "curl -f http://localhost:8080/healthz || exit 1"]
+    #   interval: 5s
+    #   timeout: 3s
+    #   retries: 3
+    #   start_period: 40s
