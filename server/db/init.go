@@ -6,7 +6,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/cengsin/oracle"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -111,12 +110,12 @@ func DBInit() {
 		Conn, err = gorm.Open(mysql.Open(dsn+"/"+dbName+"?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{
 			Logger: DBLogger,
 		})
-	// 支持 oracle
-	case "oracle":
-		log.Println("oracle")
-		Conn, err = gorm.Open(oracle.Open("system/oracle@127.0.0.1:56668/XE"), &gorm.Config{
-			Logger: DBLogger,
-		})
+		// 支持 oracle
+		// case "oracle":
+		// 	log.Println("oracle")
+		// 	Conn, err = gorm.Open(oracle.Open("system/oracle@127.0.0.1:56668/XE"), &gorm.Config{
+		// 		Logger: DBLogger,
+		// 	})
 	}
 
 	//connect err
