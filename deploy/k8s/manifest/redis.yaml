@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - image: redis:4.0
+        livenessProbe:
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          tcpSocket:
+            port: 6379
+          timeoutSeconds: 3
+        name: redis
+        ports:
+        - containerPort: 6379
+        readinessProbe:
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          tcpSocket:
+            port: 6379
+          timeoutSeconds: 3
+        resources:
+          limits:
+            cpu: 700m
+            memory: 1Gi
+          requests:
+            cpu: 50m
+            memory: 32Mi
+      enableServiceLinks: false
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  ports:
+  - name: "6379"
+    port: 6379
+  selector:
+    app: redis
+  type: ClusterIP
+
+
+
+
+

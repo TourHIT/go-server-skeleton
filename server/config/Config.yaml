@@ -1,17 +1,17 @@
 # default run mode
 RUN_MODE: 'dev'
 # default db host
-DB_HOST: '127.0.0.1'
+DB_HOST: '***'
 # db driver (support mysql、oracle)
 DB_DRIVER: 'mysql' 
 # default db port
-DB_PORT: '3306'
+DB_PORT: '30306'
 # default db name
 DB_NAME: 'zhuiyi'
 # default db name
 DB_USER: 'root'
 # default db name
-DB_PASSWD: 'zhuiyi123'
+DB_PASSWD: '***'
 # db log
 DB_LOGMODE: 'Info'
 # debug mode

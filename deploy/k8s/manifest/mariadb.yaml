@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -5,58 +6,72 @@ metadata:
 spec:
   updateStrategy:
     type: RollingUpdate
-  replicas: 1
   selector:
     matchLabels:
       app: mariadb
+  replicas: 1
   serviceName: "mariadb"
   template:
     metadata:
       labels:
         app: mariadb
     spec:
+      enableServiceLinks: false
       containers:
       - name: mariadb
-        env:
-        - name: MARIADB_ROOT_PASSWORD
-          value : root123
-        image: mariadb:10.2.38
-        imagePullPolicy: Always
-        livenessProbe:
-          initialDelaySeconds: 60
-          periodSeconds: 10
-          tcpSocket:
-            port: 3306
-          timeoutSeconds: 3
+        image: mariadb:10.4
         ports:
         - containerPort: 3306
         readinessProbe:
-          initialDelaySeconds: 60
-          periodSeconds: 10
           tcpSocket:
             port: 3306
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          timeoutSeconds: 3
+        livenessProbe:
+          tcpSocket:
+            port: 3306
+          initialDelaySeconds: 3
+          periodSeconds: 10
           timeoutSeconds: 3
         resources:
           limits:
-            cpu: 350m
-            memory: 680Mi
+            cpu: "1"
+            memory: "2Gi"
           requests:
-            cpu: 50m
-            memory: 256Mi
-      enableServiceLinks: false
+            cpu: "100m"
+            memory: "512Mi"
+        env:
+        - name: MYSQL_ROOT_USER
+          value: root
+        - name: MYSQL_ROOT_PASSWORD
+          value: ""
+        - name: MYSQL_USER
+          value: zhuiyi
+        - name: MYSQL_PASSWORD
+          value: ""
+        - name: MYSQL_DATABASE
+          value: zhuiyi
+        - name: TZ
+          value: Asia/Shanghai
+# service
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mariadb
 spec:
-  ports:
-  - name: "tcp-3306"
-    port: 3306
-    targetPort: 3306
   selector:
     app: mariadb
-  type: ClusterIP
-status:
-  loadBalancer: {}
+  type: NodePort
+  ports:
+  - name: "3306"
+    port: 3306
+    nodePort: 30306
+
+
 ...
+
+
+
+
