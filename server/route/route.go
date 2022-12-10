@@ -47,6 +47,16 @@ func DefinitionRoute(router *gin.Engine) {
 		auth.POST("/user/update", userController.UpdateUser)
 		auth.POST("/user/delete", userController.DeleteUser)
 	}
+
+	authApi := router.Group("/api")
+	var userApiController *controller.UserApiController
+	authApi.POST("/dologin", userApiController.DoLogin)
+	authApi.Use(middleware.AuthApiMiddle())
+	{
+		authApi.GET("/users", userApiController.GetAllUsers)
+		authApi.GET("/user", userApiController.GetUser)
+	}
+
 	// api doc
 	router.GET("/swagger/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "USE_SWAGGER"))
 

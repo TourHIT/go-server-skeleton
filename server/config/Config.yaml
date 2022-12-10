@@ -1,17 +1,17 @@
 # default run mode
 RUN_MODE: 'dev'
 # default db host
-DB_HOST: '***'
+DB_HOST: '127.0.0.1'
 # db driver (support mysql、oracle)
 DB_DRIVER: 'mysql' 
 # default db port
-DB_PORT: '30306'
+DB_PORT: '3306'
 # default db name
 DB_NAME: 'zhuiyi'
 # default db name
 DB_USER: 'root'
 # default db name
-DB_PASSWD: '***'
+DB_PASSWD: '123456'
 # db log
 DB_LOGMODE: 'Info'
 # debug mode
@@ -26,5 +26,9 @@ PAGE_SIZE: 20
 SERVER_PORT: '8080'
 # gRPC port
 GRPC_PORT: '22530'
+# redis address
+REDIS_HOST: '127.0.0.1:6379'
+# secretKey
+SECRET_KEY: '123456qwerty'
 
 
